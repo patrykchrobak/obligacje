@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <!-- Required meta tags -->
@@ -12,11 +12,21 @@
 
     <title>Kalkulator obligacji skarbowych</title>
     <style>
-        td, th {
+        td,
+        th {
             text-align: center;
         }
-        #pierwsza_tabela td, #pierwsza_tabela th {
+
+        #pierwsza_tabela td,
+        #pierwsza_tabela th {
             text-align: left;
+        }
+
+        div.fixed {
+            position: fixed;
+            bottom: 0;
+            margin: auto;
+            width: 100%;
         }
     </style>
 </head>
@@ -85,8 +95,8 @@
         </div>
         <div class="row">
             <label for="liczba_obligacji" class="col-3">Liczba zakupionych obligacji: </label>
-            <input class="col-2" onchange="zainwestowana_kwota()" type="number" name="liczba_obligacji" id="liczba_obligacji"
-                value="1">
+            <input class="col-2" onchange="zainwestowana_kwota()" type="number" name="liczba_obligacji"
+                id="liczba_obligacji" value="1">
         </div>
         <div class="row">
             <label for="kwota" class="col-3">Zainwestowana kwota [zł]: </label>
@@ -203,7 +213,7 @@
 
         </script>
 
-        <table class="table table-dark" id="tab">
+        <table class="table table-dark mb-5" id="tab">
             <thead>
                 <tr>
                     <th class="col-1" id="cykl">Rok</th>
@@ -873,6 +883,12 @@
         </script>
     </div>
 
+
+    <div class="footer container-fluid text-white bg-dark row text-center pt-1 pb-1 fixed justify-content-center">
+        PATRYK CHROBAK - 2022 © WSZELKIE PRAWA ZASTRZEŻONE
+    </div>
+
+    <!-- </div> -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
