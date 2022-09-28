@@ -102,18 +102,19 @@
             <h2 class="col-12">Kalkulator</h2>
         </div>
         <div class="row">
-            <label for="liczba_obligacji" class="col-6 col-sm-3">Liczba zakupionych obligacji: </label>
-            <input onchange="zainwestowana_kwota()" type="number" name="liczba_obligacji" id="liczba_obligacji"
+            <label for="liczba_obligacji" class="col-12 col-sm-3">Liczba zakupionych obligacji: </label>
+            <input class="ml-3 mb-3" onchange="zainwestowana_kwota()" type="number" name="liczba_obligacji" id="liczba_obligacji"
                 value="1">
         </div>
         <div class="row">
-            <label for="kwota" class="col-6 col-sm-3">Zainwestowana kwota [zł]: </label>
-            <div name="kwota" id="kwota">100</div>
+            <label for="kwota" class="col-12 col-sm-3">Zainwestowana kwota [zł]: </label>
+            <div class="ml-3 mb-4 text-white" name="kwota" id="kwota">100</div>
         </div>
 
         <div class="row">
-            <label for="inflacja" class="col-6 col-sm-3" id="inflacja_stopa">Zakładana inflacja [%]: </label>
-            <input name="inflacja" id="inflacja" type="number" value="2.5">
+            <label for="inflacja" class="col-12 col-sm-3" id="inflacja_stopa">Zakładana inflacja [%]:
+            </label>
+            <input class="ml-3 mb-3" name="inflacja" id="inflacja" type="number" value="2.5">
         </div>
         <br>
         <hr>
@@ -894,7 +895,8 @@
 
 
 
-    <div class="footer container-fluid text-white bg-dark row text-center mt-sm-1 pt-1 pb-1 fixed justify-content-center">
+    <div
+        class="footer container-fluid text-white bg-dark row text-center mt-sm-1 pt-1 pb-1 fixed justify-content-center">
         PATRYK CHROBAK - 2022 © WSZELKIE PRAWA ZASTRZEŻONE
     </div>
 
