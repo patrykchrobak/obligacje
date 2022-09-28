@@ -17,7 +17,7 @@
             text-align: center;
         }
 
-        #pierwsza_tabela td,
+        z #pierwsza_tabela td,
         #pierwsza_tabela th {
             text-align: left;
         }
@@ -28,6 +28,7 @@
             margin: auto;
             width: 100%;
         }
+
     </style>
 </head>
 
@@ -213,7 +214,8 @@
 
         </script>
 
-        <table class="table table-dark mb-5" id="tab">
+
+        <table class="table table-responsive table-dark mb-5" id="tab">
             <thead>
                 <tr>
                     <th class="col-1" id="cykl">Rok</th>
@@ -233,655 +235,656 @@
 
         </table>
 
-        <script>
-            obligacja = document.getElementById("wybor");
-            inflacja = document.getElementById("inflacja");
-            const tab = document.getElementById("tab");
-            oprocentowanie = document.getElementById("oprocentowanie");
+    </div>
+    <script>
+        obligacja = document.getElementById("wybor");
+        inflacja = document.getElementById("inflacja");
+        const tab = document.getElementById("tab");
+        oprocentowanie = document.getElementById("oprocentowanie");
 
-            document.getElementById("tabela").addEventListener("click", function () {
-                tabela(obligacja);
-            });
+        document.getElementById("tabela").addEventListener("click", function () {
+            tabela(obligacja);
+        });
 
 
-            function tabela(obligacja) {
-                if (obligacja.innerHTML == "OTS") {
-                    document.getElementById("cykl").innerHTML = "Miesiąc";
-                    document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
+        function tabela(obligacja) {
+            if (obligacja.innerHTML == "OTS") {
+                document.getElementById("cykl").innerHTML = "Miesiąc";
+                document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
 
-                    tab.removeChild(document.getElementById("tbody"));
-                    const tbody = document.createElement("tbody");
-                    tbody.id = "tbody";
-                    tab.append(tbody);
-                    var tr = new Array(3);
-                    var td = new Array(3);
-                    var tekst = new Array(3);
+                tab.removeChild(document.getElementById("tbody"));
+                const tbody = document.createElement("tbody");
+                tbody.id = "tbody";
+                tab.append(tbody);
+                var tr = new Array(3);
+                var td = new Array(3);
+                var tekst = new Array(3);
 
-                    for (let i = 0; i <= 3; i++) {
-                        console.log("i = " + i);
+                for (let i = 0; i <= 3; i++) {
+                    console.log("i = " + i);
 
-                        td[i] = new Array(9);
-                        tekst[i] = new Array(9);
-                        tr[i] = document.createElement("tr");
+                    td[i] = new Array(9);
+                    tekst[i] = new Array(9);
+                    tr[i] = document.createElement("tr");
 
-                        if (i == 0) {
-                            td[i][0] = document.createElement("td");
-                            td[i][1] = document.createElement("td");
-                            tekst[i][0] = document.createTextNode(0);
-                            tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
-                            td[i][0].appendChild(tekst[i][0]);
-                            td[i][1].appendChild(tekst[i][1]);
-                            tr[i].appendChild(td[i][0]);
-                            tr[i].appendChild(td[i][1]);
+                    if (i == 0) {
+                        td[i][0] = document.createElement("td");
+                        td[i][1] = document.createElement("td");
+                        tekst[i][0] = document.createTextNode(0);
+                        tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
+                        td[i][0].appendChild(tekst[i][0]);
+                        td[i][1].appendChild(tekst[i][1]);
+                        tr[i].appendChild(td[i][0]);
+                        tr[i].appendChild(td[i][1]);
 
-                        } else if (i == 1) {
-                            for (let j = 0; j < 9; j++) {
-                                td[i][j] = document.createElement("td");
+                    } else if (i == 1) {
+                        for (let j = 0; j < 9; j++) {
+                            td[i][j] = document.createElement("td");
 
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
 
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * 100) / 100);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                } else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(oprocentowanie.textContent / 12);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    tekst[i][j] = document.createTextNode(0);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * 100) / 100);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            } else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(oprocentowanie.textContent / 12);
                             }
-                        } else {
-                            for (let j = 0; j < 9; j++) {
-
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * 100) / 100);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                }
-                                else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(oprocentowanie.textContent / 12);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    if (i == 10) tekst[i][j] = document.createTextNode(0);
-                                    else tekst[i][j] = document.createTextNode(0);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                tekst[i][j] = document.createTextNode(0);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
                             }
 
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
                         }
-                        tbody.appendChild(tr[i]);
+                    } else {
+                        for (let j = 0; j < 9; j++) {
+
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * 100) / 100);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            }
+                            else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(oprocentowanie.textContent / 12);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                if (i == 10) tekst[i][j] = document.createTextNode(0);
+                                else tekst[i][j] = document.createTextNode(0);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
 
                     }
-                }
-                else if (obligacja.innerHTML == "ROR") {
-                    document.getElementById("cykl").innerHTML = "Miesiąc";
-                    document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Stopa Referencyjna na cykl [%]";
+                    tbody.appendChild(tr[i]);
 
-                    tab.removeChild(document.getElementById("tbody"));
-                    const tbody = document.createElement("tbody");
-                    tbody.id = "tbody";
-                    tab.append(tbody);
-                    var tr = new Array(12);
-                    var td = new Array(12);
-                    var tekst = new Array(12);
-
-                    for (let i = 0; i <= 12; i++) {
-                        console.log("i = " + i);
-
-                        td[i] = new Array(9);
-                        tekst[i] = new Array(9);
-                        tr[i] = document.createElement("tr");
-
-                        if (i == 0) {
-                            td[i][0] = document.createElement("td");
-                            td[i][1] = document.createElement("td");
-                            tekst[i][0] = document.createTextNode(0);
-                            tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
-                            td[i][0].appendChild(tekst[i][0]);
-                            td[i][1].appendChild(tekst[i][1]);
-                            tr[i].appendChild(td[i][0]);
-                            tr[i].appendChild(td[i][1]);
-
-                        } else if (i == 1) {
-                            for (let j = 0; j < 9; j++) {
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
-                                } else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(oprocentowanie.textContent / 12 * 100) / 100);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.5);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-                        } else {
-                            for (let j = 0; j < 9; j++) {
-
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                }
-                                else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(parseFloat(inflacja.value) / 12 * 100) / 100);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    if (i == 12) tekst[i][j] = document.createTextNode(0);
-                                    else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.5);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-
-                        }
-                        tbody.appendChild(tr[i]);
-
-                    }
-                }
-                else if (obligacja.innerHTML == "DOR") {
-                    document.getElementById("cykl").innerHTML = "Miesiąc";
-                    document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Stopa Referencyjna na cykl [%]";
-
-                    tab.removeChild(document.getElementById("tbody"));
-                    const tbody = document.createElement("tbody");
-                    tbody.id = "tbody";
-                    tab.append(tbody);
-                    var tr = new Array(24);
-                    var td = new Array(24);
-                    var tekst = new Array(24);
-
-                    for (let i = 0; i <= 24; i++) {
-                        console.log("i = " + i);
-
-                        td[i] = new Array(9);
-                        tekst[i] = new Array(9);
-                        tr[i] = document.createElement("tr");
-
-                        if (i == 0) {
-                            td[i][0] = document.createElement("td");
-                            td[i][1] = document.createElement("td");
-                            tekst[i][0] = document.createTextNode(0);
-                            tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
-                            td[i][0].appendChild(tekst[i][0]);
-                            td[i][1].appendChild(tekst[i][1]);
-                            tr[i].appendChild(td[i][0]);
-                            tr[i].appendChild(td[i][1]);
-
-                        } else if (i == 1) {
-                            for (let j = 0; j < 9; j++) {
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
-                                } else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((oprocentowanie.textContent / 12) * 100) / 100);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-                        } else {
-                            for (let j = 0; j < 9; j++) {
-
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                }
-                                else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((parseFloat(inflacja.value) + 0.25) / 12 * 100) / 100);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    if (i == 12) tekst[i][j] = document.createTextNode(0);
-                                    else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-
-                        }
-                        tbody.appendChild(tr[i]);
-
-                    }
-                }
-                else if (obligacja.innerHTML == "TOS") {
-                    document.getElementById("cykl").innerHTML = "Rok";
-                    document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
-
-                    tab.removeChild(document.getElementById("tbody"));
-                    const tbody = document.createElement("tbody");
-                    tbody.id = "tbody";
-                    tab.append(tbody);
-                    var tr = new Array(3);
-                    var td = new Array(3);
-                    var tekst = new Array(3);
-
-                    for (let i = 0; i <= 3; i++) {
-                        console.log("i = " + i);
-
-                        td[i] = new Array(9);
-                        tekst[i] = new Array(9);
-                        tr[i] = document.createElement("tr");
-
-                        if (i == 0) {
-                            td[i][0] = document.createElement("td");
-                            td[i][1] = document.createElement("td");
-                            tekst[i][0] = document.createTextNode(0);
-                            tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
-                            td[i][0].appendChild(tekst[i][0]);
-                            td[i][1].appendChild(tekst[i][1]);
-                            tr[i].appendChild(td[i][0]);
-                            tr[i].appendChild(td[i][1]);
-
-                        } else if (i == 1) {
-                            for (let j = 0; j < 9; j++) {
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + oprocentowanie.textContent / 100) * 100) / 100);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                } else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-                        } else {
-                            for (let j = 0; j < 9; j++) {
-
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + oprocentowanie.textContent / 100) * 100) / 100);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                }
-                                else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    if (i == 3) tekst[i][j] = document.createTextNode(0);
-                                    else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-
-                        }
-                        tbody.appendChild(tr[i]);
-
-                    }
-                }
-                else if (obligacja.innerHTML == "COI") {
-                    document.getElementById("cykl").innerHTML = "Rok";
-                    document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
-
-                    tab.removeChild(document.getElementById("tbody"));
-                    const tbody = document.createElement("tbody");
-                    tbody.id = "tbody";
-                    tab.append(tbody);
-                    var tr = new Array(4);
-                    var td = new Array(4);
-                    var tekst = new Array(4);
-
-                    for (let i = 0; i <= 4; i++) {
-                        console.log("i = " + i);
-
-                        td[i] = new Array(9);
-                        tekst[i] = new Array(9);
-                        tr[i] = document.createElement("tr");
-
-                        if (i == 0) {
-                            td[i][0] = document.createElement("td");
-                            td[i][1] = document.createElement("td");
-                            tekst[i][0] = document.createTextNode(0);
-                            tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
-                            td[i][0].appendChild(tekst[i][0]);
-                            td[i][1].appendChild(tekst[i][1]);
-                            tr[i].appendChild(td[i][0]);
-                            tr[i].appendChild(td[i][1]);
-
-                        } else if (i == 1) {
-                            for (let j = 0; j < 9; j++) {
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
-                                } else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-                        } else {
-                            for (let j = 0; j < 9; j++) {
-
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                }
-                                else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(parseFloat(inflacja.value) + 1.0);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    if (i == 4) tekst[i][j] = document.createTextNode(0);
-                                    else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-
-                        }
-                        tbody.appendChild(tr[i]);
-
-                    }
-                }
-                else if (obligacja.innerHTML == "EDO") {
-                    document.getElementById("cykl").innerHTML = "Rok";
-                    document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
-
-                    tab.removeChild(document.getElementById("tbody"));
-                    const tbody = document.createElement("tbody");
-                    tbody.id = "tbody";
-                    tab.append(tbody);
-                    var tr = new Array(10);
-                    var td = new Array(10);
-                    var tekst = new Array(10);
-
-                    for (let i = 0; i <= 10; i++) {
-                        console.log("i = " + i);
-
-                        td[i] = new Array(9);
-                        tekst[i] = new Array(9);
-                        tr[i] = document.createElement("tr");
-
-                        if (i == 0) {
-                            td[i][0] = document.createElement("td");
-                            td[i][1] = document.createElement("td");
-                            tekst[i][0] = document.createTextNode(0);
-                            tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
-                            td[i][0].appendChild(tekst[i][0]);
-                            td[i][1].appendChild(tekst[i][1]);
-                            tr[i].appendChild(td[i][0]);
-                            tr[i].appendChild(td[i][1]);
-
-                        } else if (i == 1) {
-                            for (let j = 0; j < 9; j++) {
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + oprocentowanie.textContent / 100) * 100) / 100);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                } else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 2);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-                        } else {
-                            for (let j = 0; j < 9; j++) {
-
-                                td[i][j] = document.createElement("td");
-
-                                if (j == 0) {
-                                    tekst[i][j] = document.createTextNode(i);
-                                } else if (j == 1) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + (parseFloat(inflacja.value) + 1.25) / 100) * 100) / 100);
-                                    // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
-                                }
-                                else if (j == 2) {
-                                    tekst[i][j] = document.createTextNode(parseFloat(inflacja.value) + 1.25);
-                                }
-                                else if (j == 3) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 4) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
-                                }
-                                else if (j == 5) {
-                                    if (i == 10) tekst[i][j] = document.createTextNode(0);
-                                    else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 2);
-                                }
-                                else if (j == 6) {
-                                    tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
-                                }
-                                else if (j == 7) {
-                                    tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
-                                }
-                                else if (j == 8) {
-                                    tekst[i][j] = document.createTextNode(inflacja.value);
-                                }
-
-                                td[i][j].appendChild(tekst[i][j]);
-                                tr[i].appendChild(td[i][j]);
-                            }
-
-                        }
-                        tbody.appendChild(tr[i]);
-
-                    }
                 }
             }
-        </script>
-    </div>
+            else if (obligacja.innerHTML == "ROR") {
+                document.getElementById("cykl").innerHTML = "Miesiąc";
+                document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Stopa Referencyjna na cykl [%]";
+
+                tab.removeChild(document.getElementById("tbody"));
+                const tbody = document.createElement("tbody");
+                tbody.id = "tbody";
+                tab.append(tbody);
+                var tr = new Array(12);
+                var td = new Array(12);
+                var tekst = new Array(12);
+
+                for (let i = 0; i <= 12; i++) {
+                    console.log("i = " + i);
+
+                    td[i] = new Array(9);
+                    tekst[i] = new Array(9);
+                    tr[i] = document.createElement("tr");
+
+                    if (i == 0) {
+                        td[i][0] = document.createElement("td");
+                        td[i][1] = document.createElement("td");
+                        tekst[i][0] = document.createTextNode(0);
+                        tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
+                        td[i][0].appendChild(tekst[i][0]);
+                        td[i][1].appendChild(tekst[i][1]);
+                        tr[i].appendChild(td[i][0]);
+                        tr[i].appendChild(td[i][1]);
+
+                    } else if (i == 1) {
+                        for (let j = 0; j < 9; j++) {
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
+                            } else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(Math.floor(oprocentowanie.textContent / 12 * 100) / 100);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.5);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+                    } else {
+                        for (let j = 0; j < 9; j++) {
+
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            }
+                            else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(Math.floor(parseFloat(inflacja.value) / 12 * 100) / 100);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                if (i == 12) tekst[i][j] = document.createTextNode(0);
+                                else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.5);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+
+                    }
+                    tbody.appendChild(tr[i]);
+
+                }
+            }
+            else if (obligacja.innerHTML == "DOR") {
+                document.getElementById("cykl").innerHTML = "Miesiąc";
+                document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Stopa Referencyjna na cykl [%]";
+
+                tab.removeChild(document.getElementById("tbody"));
+                const tbody = document.createElement("tbody");
+                tbody.id = "tbody";
+                tab.append(tbody);
+                var tr = new Array(24);
+                var td = new Array(24);
+                var tekst = new Array(24);
+
+                for (let i = 0; i <= 24; i++) {
+                    console.log("i = " + i);
+
+                    td[i] = new Array(9);
+                    tekst[i] = new Array(9);
+                    tr[i] = document.createElement("tr");
+
+                    if (i == 0) {
+                        td[i][0] = document.createElement("td");
+                        td[i][1] = document.createElement("td");
+                        tekst[i][0] = document.createTextNode(0);
+                        tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
+                        td[i][0].appendChild(tekst[i][0]);
+                        td[i][1].appendChild(tekst[i][1]);
+                        tr[i].appendChild(td[i][0]);
+                        tr[i].appendChild(td[i][1]);
+
+                    } else if (i == 1) {
+                        for (let j = 0; j < 9; j++) {
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
+                            } else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(Math.floor((oprocentowanie.textContent / 12) * 100) / 100);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+                    } else {
+                        for (let j = 0; j < 9; j++) {
+
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            }
+                            else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(Math.floor((parseFloat(inflacja.value) + 0.25) / 12 * 100) / 100);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                if (i == 12) tekst[i][j] = document.createTextNode(0);
+                                else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+
+                    }
+                    tbody.appendChild(tr[i]);
+
+                }
+            }
+            else if (obligacja.innerHTML == "TOS") {
+                document.getElementById("cykl").innerHTML = "Rok";
+                document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
+
+                tab.removeChild(document.getElementById("tbody"));
+                const tbody = document.createElement("tbody");
+                tbody.id = "tbody";
+                tab.append(tbody);
+                var tr = new Array(3);
+                var td = new Array(3);
+                var tekst = new Array(3);
+
+                for (let i = 0; i <= 3; i++) {
+                    console.log("i = " + i);
+
+                    td[i] = new Array(9);
+                    tekst[i] = new Array(9);
+                    tr[i] = document.createElement("tr");
+
+                    if (i == 0) {
+                        td[i][0] = document.createElement("td");
+                        td[i][1] = document.createElement("td");
+                        tekst[i][0] = document.createTextNode(0);
+                        tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
+                        td[i][0].appendChild(tekst[i][0]);
+                        td[i][1].appendChild(tekst[i][1]);
+                        tr[i].appendChild(td[i][0]);
+                        tr[i].appendChild(td[i][1]);
+
+                    } else if (i == 1) {
+                        for (let j = 0; j < 9; j++) {
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + oprocentowanie.textContent / 100) * 100) / 100);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            } else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+                    } else {
+                        for (let j = 0; j < 9; j++) {
+
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + oprocentowanie.textContent / 100) * 100) / 100);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            }
+                            else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                if (i == 3) tekst[i][j] = document.createTextNode(0);
+                                else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+
+                    }
+                    tbody.appendChild(tr[i]);
+
+                }
+            }
+            else if (obligacja.innerHTML == "COI") {
+                document.getElementById("cykl").innerHTML = "Rok";
+                document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
+
+                tab.removeChild(document.getElementById("tbody"));
+                const tbody = document.createElement("tbody");
+                tbody.id = "tbody";
+                tab.append(tbody);
+                var tr = new Array(4);
+                var td = new Array(4);
+                var tekst = new Array(4);
+
+                for (let i = 0; i <= 4; i++) {
+                    console.log("i = " + i);
+
+                    td[i] = new Array(9);
+                    tekst[i] = new Array(9);
+                    tr[i] = document.createElement("tr");
+
+                    if (i == 0) {
+                        td[i][0] = document.createElement("td");
+                        td[i][1] = document.createElement("td");
+                        tekst[i][0] = document.createTextNode(0);
+                        tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
+                        td[i][0].appendChild(tekst[i][0]);
+                        td[i][1].appendChild(tekst[i][1]);
+                        tr[i].appendChild(td[i][0]);
+                        tr[i].appendChild(td[i][1]);
+
+                    } else if (i == 1) {
+                        for (let j = 0; j < 9; j++) {
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
+                            } else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+                    } else {
+                        for (let j = 0; j < 9; j++) {
+
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(tekst[i - 1][j].textContent);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            }
+                            else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(parseFloat(inflacja.value) + 1.0);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent * tekst[i][j - 1].textContent / 100) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                if (i == 4) tekst[i][j] = document.createTextNode(0);
+                                else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+
+                    }
+                    tbody.appendChild(tr[i]);
+
+                }
+            }
+            else if (obligacja.innerHTML == "EDO") {
+                document.getElementById("cykl").innerHTML = "Rok";
+                document.getElementById("inflacjaLUBstopaNBP").innerHTML = "Inflacja na cykl [%]";
+
+                tab.removeChild(document.getElementById("tbody"));
+                const tbody = document.createElement("tbody");
+                tbody.id = "tbody";
+                tab.append(tbody);
+                var tr = new Array(10);
+                var td = new Array(10);
+                var tekst = new Array(10);
+
+                for (let i = 0; i <= 10; i++) {
+                    console.log("i = " + i);
+
+                    td[i] = new Array(9);
+                    tekst[i] = new Array(9);
+                    tr[i] = document.createElement("tr");
+
+                    if (i == 0) {
+                        td[i][0] = document.createElement("td");
+                        td[i][1] = document.createElement("td");
+                        tekst[i][0] = document.createTextNode(0);
+                        tekst[i][1] = document.createTextNode(document.getElementById("kwota").innerHTML);
+                        td[i][0].appendChild(tekst[i][0]);
+                        td[i][1].appendChild(tekst[i][1]);
+                        tr[i].appendChild(td[i][0]);
+                        tr[i].appendChild(td[i][1]);
+
+                    } else if (i == 1) {
+                        for (let j = 0; j < 9; j++) {
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + oprocentowanie.textContent / 100) * 100) / 100);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            } else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(oprocentowanie.textContent);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 2);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+                    } else {
+                        for (let j = 0; j < 9; j++) {
+
+                            td[i][j] = document.createElement("td");
+
+                            if (j == 0) {
+                                tekst[i][j] = document.createTextNode(i);
+                            } else if (j == 1) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i - 1][j].textContent) * (1 + (parseFloat(inflacja.value) + 1.25) / 100) * 100) / 100);
+                                // Math.floor(... *100)/100 żeby były 2 miejsca po przecinku
+                            }
+                            else if (j == 2) {
+                                tekst[i][j] = document.createTextNode(parseFloat(inflacja.value) + 1.25);
+                            }
+                            else if (j == 3) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 2].textContent - tekst[i - 1][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 4) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[0][j - 3].textContent) * 100) / 100);
+                            }
+                            else if (j == 5) {
+                                if (i == 10) tekst[i][j] = document.createTextNode(0);
+                                else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 2);
+                            }
+                            else if (j == 6) {
+                                tekst[i][j] = document.createTextNode(Math.floor(0.19 * (tekst[i][j - 2].textContent - tekst[i][j - 1].textContent) * 100) / 100);
+                            }
+                            else if (j == 7) {
+                                tekst[i][j] = document.createTextNode(Math.floor((tekst[i][j - 3].textContent - tekst[i][j - 1].textContent - tekst[i][j - 2].textContent) * 100) / 100);
+                            }
+                            else if (j == 8) {
+                                tekst[i][j] = document.createTextNode(inflacja.value);
+                            }
+
+                            td[i][j].appendChild(tekst[i][j]);
+                            tr[i].appendChild(td[i][j]);
+                        }
+
+                    }
+                    tbody.appendChild(tr[i]);
+
+                }
+            }
+        }
+    </script>
+
 
 
     <div class="footer container-fluid text-white bg-dark row text-center pt-1 pb-1 fixed justify-content-center">
