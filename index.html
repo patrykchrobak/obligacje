@@ -550,7 +550,7 @@
                                 tekst[i][j] = document.createTextNode(Math.floor((parseFloat(tekst[i][j - 1].textContent) + parseFloat(tekst[i - 1][j].textContent)) * 100) / 100);
                             }
                             else if (j == 5) {
-                                if (i == 12) tekst[i][j] = document.createTextNode(0);
+                                if (i == 24) tekst[i][j] = document.createTextNode(0);
                                 else tekst[i][j] = document.createTextNode(document.getElementById("liczba_obligacji").value * 0.7);
                             }
                             else if (j == 6) {
